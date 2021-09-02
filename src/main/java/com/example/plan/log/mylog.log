@@ -1,0 +1,15 @@
+2021-09-02 15:31:20 [INFO] [com.example.plan.controller.LogController] [http-nio-8080-exec-2] [com.example.plan.controller.LogController.printHello(LogController.java:18)] - Low Fuel level
+2021-09-02 15:31:22 [INFO] [com.example.plan.controller.LogController] [http-nio-8080-exec-3] [com.example.plan.controller.LogController.printHello(LogController.java:18)] - Low Fuel level
+2021-09-02 15:38:01 [DEBUG] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:18)] - DEBUG LEVEL
+2021-09-02 15:38:01 [INFO] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:19)] - INFO LEVEL
+2021-09-02 15:38:01 [WARN] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:20)] - WARN LEVEL
+2021-09-02 15:38:01 [ERROR] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:21)] - ERROR LEVEL
+2021-09-02 15:38:01 [FATAL] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:22)] - FATAL LEVEL
+2021-09-02 15:38:31 [INFO] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:19)] - INFO LEVEL
+2021-09-02 15:38:31 [WARN] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:20)] - WARN LEVEL
+2021-09-02 15:38:31 [ERROR] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:21)] - ERROR LEVEL
+2021-09-02 15:38:31 [FATAL] [com.example.plan.controller.LogController] [http-nio-8080-exec-1] [com.example.plan.controller.LogController.printHello(LogController.java:22)] - FATAL LEVEL
+2021-09-02 15:44:56 [INFO] [com.example.plan.controller.LogController] [http-nio-8080-exec-4] [com.example.plan.controller.LogController.printHello(LogController.java:19)] - INFO LEVEL
+2021-09-02 15:44:56 [WARN] [com.example.plan.controller.LogController] [http-nio-8080-exec-4] [com.example.plan.controller.LogController.printHello(LogController.java:20)] - WARN LEVEL
+2021-09-02 15:44:56 [ERROR] [com.example.plan.controller.LogController] [http-nio-8080-exec-4] [com.example.plan.controller.LogController.printHello(LogController.java:21)] - ERROR LEVEL
+2021-09-02 15:44:56 [FATAL] [com.example.plan.controller.LogController] [http-nio-8080-exec-4] [com.example.plan.controller.LogController.printHello(LogController.java:22)] - FATAL LEVEL
