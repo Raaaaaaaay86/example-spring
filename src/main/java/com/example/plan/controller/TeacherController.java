@@ -3,6 +3,7 @@ package com.example.plan.controller;
 import com.example.plan.entity.Teacher;
 import com.example.plan.reponse.DataResponse;
 import com.example.plan.service.Impl.TeacherService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,21 @@ public class TeacherController {
     teacherService.updateById(updateTeacher);
     var msg = "教師ID: " + updateTeacher.getId() + " 更新完成";
     return new DataResponse(updateTeacher, msg);
+  }
+
+  @GetMapping("/get/{id}")
+  public DataResponse getTeacherById(@PathVariable(value = "id") long id) {
+    var repoTeacher = teacherService.findById(id);
+
+    if (repoTeacher.isEmpty()) return new DataResponse(null, "查無此教師");
+
+    Map<String, Object> result = new HashMap<>();
+    result.put("id", repoTeacher.get().getId());
+    result.put("name", repoTeacher.get().getName());
+    result.put("sex", repoTeacher.get().getSex());
+    result.put("birthday", repoTeacher.get().getBirthday());
+
+    return new DataResponse(result, "操作成功");
   }
 
   @GetMapping("/getAll")
