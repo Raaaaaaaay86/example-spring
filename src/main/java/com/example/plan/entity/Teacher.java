@@ -10,17 +10,17 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Data
-public class Teacher extends AuditEntity{
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+public class Teacher extends AuditEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-  @NotEmpty(message = "姓名不得為空")
-  private String name;
+	@NotEmpty(message = "姓名不得為空")
+	private String name;
 
-  @NotEmpty(message = "性別不得為空")
-  private String sex;
+	@NotEmpty(message = "性別不得為空")
+	private String sex;
 
-  @NotEmpty(message = "生日不得為空")
-  private String birthday;
+	@NotEmpty(message = "生日不得為空")
+	private String birthday;
 }

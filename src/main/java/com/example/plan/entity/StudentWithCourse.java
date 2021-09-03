@@ -8,12 +8,12 @@ import javax.persistence.*;
 @Data
 @Table(name = "student_course")
 public class StudentWithCourse {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-  @Column(name = "student_id")
-  private long studentId;
-  @Column(name = "course_id")
-  private long courseId;
+	@Column(name = "student_id")
+	private long studentId;
+	@Column(name = "course_id")
+	private long courseId;
 }

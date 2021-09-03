@@ -30,25 +30,25 @@ class PlanApplicationTests {
 	private StudentWithCourseService studentWithCourseService;
 
 	@Test
-	public void addCourse() {
+	public void addCourse () {
 		var course = new Course();
 		course.setName("體育");
 		courseService.save(course);
 	}
 
 	@Test
-	public void addStudent() {
+	public void addStudent () {
 	}
 
 	@Test
-	public void updateStudent() {
+	public void updateStudent () {
 		var repoStudent = studentService.findById(44).get();
 		repoStudent.setName("王花44");
 		studentService.updateById(repoStudent);
 	}
 
 	@Test
-	public void addStudentToCourse() {
+	public void addStudentToCourse () {
 		long studentId = 3;
 		long courseId = 2;
 		var studentWithCourse = new StudentWithCourse();

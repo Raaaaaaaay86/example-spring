@@ -10,17 +10,17 @@ import java.util.List;
 @Entity
 @Data
 public class Course extends AuditEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-  @NotEmpty(message = "課程名不得為空")
-  private String name;
+	@NotEmpty(message = "課程名不得為空")
+	private String name;
 
-  @Column(name = "teacher_id")
-  @NotNull(message = "教師編號不得為空")
-  private long teacherId;
+	@Column(name = "teacher_id")
+	@NotNull(message = "教師編號不得為空")
+	private long teacherId;
 
-  @ManyToMany(mappedBy = "courseList")
-  private List<Student> studentList;
+	@ManyToMany(mappedBy = "courseList")
+	private List<Student> studentList;
 }

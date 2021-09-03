@@ -11,32 +11,32 @@ import java.util.Optional;
 
 @Service
 public class StudentWithCourseService implements IStudentWithCourseService {
-  @Autowired
-  StudentWithCourseRepository studentWithCourseRepository;
+	@Autowired
+	StudentWithCourseRepository studentWithCourseRepository;
 
-  @Override
-  public Object save(StudentWithCourse studentWithCourse) {
-    studentWithCourseRepository.save(studentWithCourse);
-    return studentWithCourse;
-  }
+	@Override
+	public Object save (StudentWithCourse studentWithCourse) {
+		studentWithCourseRepository.save(studentWithCourse);
+		return studentWithCourse;
+	}
 
-  @Override
-  public Optional<StudentWithCourse> findById(long id) {
-    return studentWithCourseRepository.findById(id);
-  }
+	@Override
+	public Optional<StudentWithCourse> findById (long id) {
+		return studentWithCourseRepository.findById(id);
+	}
 
-  @Override
-  public List<StudentWithCourse> findAll() {
-    return studentWithCourseRepository.findAll();
-  }
+	@Override
+	public List<StudentWithCourse> findAll () {
+		return studentWithCourseRepository.findAll();
+	}
 
-  @Override
-  public void deleteById(long id) {
-    studentWithCourseRepository.deleteById(id);
-  }
+	@Override
+	public void deleteById (long id) {
+		studentWithCourseRepository.deleteById(id);
+	}
 
-  @Override
-  public void deleteAll() {
-    studentWithCourseRepository.deleteAll();
-  }
+	@Override
+	public void deleteAll () {
+		studentWithCourseRepository.deleteAll();
+	}
 }

@@ -18,53 +18,55 @@ import java.util.Optional;
 @CacheConfig(cacheNames = "studentService")
 public class StudentService implements IStudentService {
 
-  private final Logger logger = Logger.getLogger("stdout1");
+	private final Logger logger = Logger.getLogger("stdout1");
 
-  @Autowired
-  private StudentRepository studentRepository;
+	@Autowired
+	private StudentRepository studentRepository;
 
-  @Override
-  @Cacheable(value = "student", key = "#p0.getId()")
-  public Object save(Student student) {
-    studentRepository.save(student);
-    return student;
-  }
+	@Override
+	@Cacheable(value = "student", key = "#p0.getId()")
+	public Object save (Student student) {
+		studentRepository.save(student);
+		return student;
+	}
 
-  @Override
-  @Cacheable(value = "student", key = "#p0")
-  public Optional<Student> findById(long id) {
-    logger.debug("Get Student ID " + id + " From SQL");
-    return studentRepository.findById(id);
-  }
+	@Override
+	@Cacheable(value = "student", key = "#p0")
+	public Optional<Student> findById (long id) {
+		logger.debug("Get Student ID " + id + " From SQL");
+		return studentRepository.findById(id);
+	}
 
-  @Override
-  @Cacheable(value = "studentList")
-  public List<Student> findAll() {
-    logger.debug("Get student list from SQL");
-    return studentRepository.findAll();
-  }
+	@Override
+	@Cacheable(value = "studentList")
+	public List<Student> findAll () {
+		logger.debug("Get student list from SQL");
+		return studentRepository.findAll();
+	}
 
-  @Override
-  @CacheEvict(value = "student", key = "#p0")
-  public void deleteById(long id) {
-    logger.debug("Delete Student ID: " + id);
-    studentRepository.deleteById(id);
-  }
+	@Override
+	@CacheEvict(value = "student", key = "#p0")
+	public void deleteById (long id) {
+		logger.debug("Delete Student ID: " + id);
+		studentRepository.deleteById(id);
+	}
 
-  @Override
-  @CacheEvict(value = "student", allEntries = true)
-  public void deleteAll() {
-    logger.debug("Delete all student....");
-    studentRepository.deleteAll();
-  }
+	@Override
+	@CacheEvict(value = "student", allEntries = true)
+	public void deleteAll () {
+		logger.debug("Delete all student....");
+		studentRepository.deleteAll();
+	}
 
-  @Override
-  @CachePut(value = "student", key = "#p0.getId()")
-  public Student updateById(Student student) {
-    Optional<Student> repoStudent = studentRepository.findById(student.getId());
-    if (repoStudent.isEmpty()) return null;
-    studentRepository.save(student);
-    logger.debug("Update student ID: " + student.getId());
-    return student;
-  }
+	@Override
+	@CachePut(value = "student", key = "#p0.getId()")
+	public Student updateById (Student student) {
+		Optional<Student> repoStudent = studentRepository.findById(student.getId());
+      if (repoStudent.isEmpty()) {
+        return null;
+      }
+		studentRepository.save(student);
+		logger.debug("Update student ID: " + student.getId());
+		return student;
+	}
 }

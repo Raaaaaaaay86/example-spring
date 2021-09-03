@@ -18,19 +18,19 @@ import javax.persistence.MappedSuperclass;
 @Data
 public abstract class AuditEntity {
 
-  @Column(name = "create_time", updatable = false)
-  @CreatedDate
-  private long createTime;
+	@Column(name = "create_time", updatable = false)
+	@CreatedDate
+	private long createTime;
 
-  @Column(name = "update_time")
-  @LastModifiedDate
-  private long updateTime;
+	@Column(name = "update_time")
+	@LastModifiedDate
+	private long updateTime;
 
-  @Column(name = "create_by", updatable = false)
-  @CreatedBy
-  private String createBy;
+	@Column(name = "create_by", updatable = false)
+	@CreatedBy
+	private String createBy;
 
-  @Column(name = "last_modified_by")
-  @LastModifiedBy
-  private String lastModifiedBy;
+	@Column(name = "last_modified_by")
+	@LastModifiedBy
+	private String lastModifiedBy;
 }

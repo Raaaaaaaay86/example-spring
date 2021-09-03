@@ -13,14 +13,16 @@ import java.util.Date;
 
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
-  @Override
-  public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-    var responseJSON = new JSONObject();
-    responseJSON.put("timestamp", new Date().getTime());
-    responseJSON.put("status", "403");
-    responseJSON.put("message", "權限不足");
-    httpServletResponse.setHeader("content-type", "application/json");
-    httpServletResponse.setCharacterEncoding("UTF-8");
-    httpServletResponse.getWriter().println(responseJSON.toString());
-  }
+	@Override
+	public void handle (HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse,
+			AccessDeniedException e) throws IOException, ServletException {
+		var responseJSON = new JSONObject();
+		responseJSON.put("timestamp", new Date().getTime());
+		responseJSON.put("status", "403");
+		responseJSON.put("message", "權限不足");
+		httpServletResponse.setHeader("content-type", "application/json");
+		httpServletResponse.setCharacterEncoding("UTF-8");
+		httpServletResponse.getWriter().println(responseJSON.toString());
+	}
 }

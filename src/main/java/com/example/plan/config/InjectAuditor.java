@@ -10,16 +10,20 @@ import java.util.Optional;
 
 @Configuration
 public class InjectAuditor implements AuditorAware<String> {
-  @Override
-  public Optional<String> getCurrentAuditor() {
-    SecurityContext securityContext = SecurityContextHolder.getContext();
+	@Override
+	public Optional<String> getCurrentAuditor () {
+		SecurityContext securityContext = SecurityContextHolder.getContext();
 
-    if (securityContext == null) return null;
-    if (securityContext.getAuthentication() == null) return null;
+		if (securityContext == null) {
+			return null;
+		}
+		if (securityContext.getAuthentication() == null) {
+			return null;
+		}
 
-    String loginUserName = securityContext.getAuthentication().getName();
-    Optional<String> name = Optional.ofNullable(loginUserName);
+		String loginUserName = securityContext.getAuthentication().getName();
+		Optional<String> name = Optional.ofNullable(loginUserName);
 
-    return name;
-  }
+		return name;
+	}
 }

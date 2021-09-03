@@ -16,34 +16,21 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  private AccessDeniedHandler customDeniedHandler;
+	@Autowired
+	private AccessDeniedHandler customDeniedHandler;
 
-  @Override
-  public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    PasswordEncoder bcPasswordEncoder = new BCryptPasswordEncoder();
+	@Override
+	public void configure (AuthenticationManagerBuilder auth) throws Exception {
+		PasswordEncoder bcPasswordEncoder = new BCryptPasswordEncoder();
 
-    auth.inMemoryAuthentication()
-      .passwordEncoder(bcPasswordEncoder)
-      .withUser("admin")
-      .password(bcPasswordEncoder.encode("eee333"))
-      .roles("ADMIN")
-      .and()
-      .withUser("ken")
-      .password(bcPasswordEncoder.encode("eee333"))
-      .roles("MEMBER");
-  }
+		auth.inMemoryAuthentication().passwordEncoder(bcPasswordEncoder).withUser("admin")
+				.password(bcPasswordEncoder.encode("eee333")).roles("ADMIN").and().withUser("ken")
+				.password(bcPasswordEncoder.encode("eee333")).roles("MEMBER");
+	}
 
-  @Override
-  public void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-      .antMatchers("/course/**").hasRole("ADMIN")
-      .anyRequest().authenticated()
-      .and()
-      .httpBasic()
-      .and()
-      .exceptionHandling().accessDeniedHandler(customDeniedHandler)
-      .and()
-      .csrf().disable();
-  }
+	@Override
+	public void configure (HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/course/**").hasRole("ADMIN").anyRequest().authenticated().and()
+				.httpBasic().and().exceptionHandling().accessDeniedHandler(customDeniedHandler).and().csrf().disable();
+	}
 }

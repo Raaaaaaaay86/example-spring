@@ -11,41 +11,43 @@ import java.util.Optional;
 
 @Service
 public class CourseService implements ICourseService {
-  @Autowired
-  private CourseRepository courseRepository;
+	@Autowired
+	private CourseRepository courseRepository;
 
-  @Override
-  public Object save(Course course) {
-    System.out.println("[CourseService]" + course);
-    courseRepository.save(course);
-    return course;
-  }
+	@Override
+	public Object save (Course course) {
+		System.out.println("[CourseService]" + course);
+		courseRepository.save(course);
+		return course;
+	}
 
-  @Override
-  public Optional<Course> findById(long id) {
-    return courseRepository.findById(id);
-  }
+	@Override
+	public Optional<Course> findById (long id) {
+		return courseRepository.findById(id);
+	}
 
-  @Override
-  public List<Course> findAll() {
-    return courseRepository.findAll();
-  }
+	@Override
+	public List<Course> findAll () {
+		return courseRepository.findAll();
+	}
 
-  @Override
-  public void deleteById(long id) {
-    courseRepository.deleteById(id);
-  }
+	@Override
+	public void deleteById (long id) {
+		courseRepository.deleteById(id);
+	}
 
-  @Override
-  public void deleteAll() {
-    courseRepository.deleteAll();
-  }
+	@Override
+	public void deleteAll () {
+		courseRepository.deleteAll();
+	}
 
-  @Override
-  public boolean updateById(Course course) {
-    Optional<Course> repoCourse = courseRepository.findById(course.getId());
-    if(repoCourse.isEmpty()) return false;
-    courseRepository.save(course);
-    return true;
-  }
+	@Override
+	public boolean updateById (Course course) {
+		Optional<Course> repoCourse = courseRepository.findById(course.getId());
+		if (repoCourse.isEmpty()) {
+			return false;
+		}
+		courseRepository.save(course);
+		return true;
+	}
 }

@@ -16,28 +16,28 @@ import java.util.Date;
 @RequestMapping("/log")
 public class LogController {
 
-  private Logger logger = Logger.getLogger("stdout1");
+	private Logger logger = Logger.getLogger("stdout1");
 
-  @Autowired
-  private RedisTemplate<String, Object> redisTemplate;
+	@Autowired
+	private RedisTemplate<String, Object> redisTemplate;
 
-  @GetMapping("/")
-  public Object printHello(ModelMap model) {
-    logger.debug("Hello /log");
-    var student = new Student();
-    student.setName("王王王");
-    student.setId(99);
-    student.setSex("male");
-    student.setBirthday(876182400000L);
+	@GetMapping("/")
+	public Object printHello (ModelMap model) {
+		logger.debug("Hello /log");
+		var student = new Student();
+		student.setName("王王王");
+		student.setId(99);
+		student.setSex("male");
+		student.setBirthday(876182400000L);
 
-    redisTemplate.opsForValue().set("student::99", student);
-    return "re";
-  }
+		redisTemplate.opsForValue().set("student::99", student);
+		return "re";
+	}
 
-  @GetMapping("/aa")
-  public Object test() {
-    var re = redisTemplate.opsForValue().get("student::54");
-    logger.debug(re);
-    return "ss";
-  }
+	@GetMapping("/aa")
+	public Object test () {
+		var re = redisTemplate.opsForValue().get("student::54");
+		logger.debug(re);
+		return "ss";
+	}
 }

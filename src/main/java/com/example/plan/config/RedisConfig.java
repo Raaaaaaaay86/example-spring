@@ -20,52 +20,55 @@ import java.lang.reflect.Method;
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
-  @Autowired
-  private RedisConnectionFactory redisConnectionFactory;
+	@Autowired
+	private RedisConnectionFactory redisConnectionFactory;
 
-  @Bean
-  public KeyGenerator keyGenerator() {
-    return new KeyGenerator() {
-      @Override
-      public Object generate(Object target, Method method, Object... params) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(target.getClass().getName());
-        stringBuilder.append(method.getName());
-        for (Object obj : params) {
-          stringBuilder.append(obj.toString());
-        }
-        return stringBuilder.toString();
-      }
-    };
-  }
+	@Bean
+	public KeyGenerator keyGenerator () {
+		return new KeyGenerator() {
+			@Override
+			public Object generate (Object target, Method method, Object... params) {
+				StringBuilder stringBuilder = new StringBuilder();
+				stringBuilder.append(target.getClass().getName());
+				stringBuilder.append(method.getName());
+				for (Object obj : params) {
+					stringBuilder.append(obj.toString());
+				}
+				return stringBuilder.toString();
+			}
+		};
+	}
 
-//  @SuppressWarnings("rawtypes")
-  @Bean
-  public CacheManager cacheManager(RedisTemplate redisTemplate) {
-    RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisTemplate.getConnectionFactory());
-    RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-      .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getValueSerializer()));
+	//  @SuppressWarnings("rawtypes")
+	@Bean
+	public CacheManager cacheManager (RedisTemplate redisTemplate) {
+		RedisCacheWriter redisCacheWriter =
+				RedisCacheWriter.nonLockingRedisCacheWriter(redisTemplate.getConnectionFactory());
+		RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+				.serializeValuesWith(
+						RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getValueSerializer()));
 
-    return new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
-  }
+		return new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
+	}
 
-  @Bean
-  public RedisTemplate<String, Object> redisTemplate() {
-    RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-    redisTemplate.setConnectionFactory(this.redisConnectionFactory);
+	@Bean
+	public RedisTemplate<String, Object> redisTemplate () {
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+		redisTemplate.setConnectionFactory(this.redisConnectionFactory);
 
-    Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
-    StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+		Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer =
+				new Jackson2JsonRedisSerializer<Object>(Object.class);
+		StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
 
-    redisTemplate.setKeySerializer(stringRedisSerializer);
-    redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+		redisTemplate.setKeySerializer(stringRedisSerializer);
+		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
 
-    redisTemplate.setHashKeySerializer(stringRedisSerializer);
-    redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+		redisTemplate.setHashKeySerializer(stringRedisSerializer);
+		redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
 
-    redisTemplate.setEnableDefaultSerializer(true);
-    redisTemplate.setDefaultSerializer(jackson2JsonRedisSerializer);
-    return redisTemplate;
-  }
+		redisTemplate.setEnableDefaultSerializer(true);
+		redisTemplate.setDefaultSerializer(jackson2JsonRedisSerializer);
+		return redisTemplate;
+	}
 
 }
