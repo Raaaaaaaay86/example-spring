@@ -1,59 +1,77 @@
 package com.example.plan;
 
-import com.example.plan.entity.Course;
-import com.example.plan.entity.Info;
-import com.example.plan.entity.Student;
-import com.example.plan.entity.StudentWithCourse;
-import com.example.plan.repository.StudentRepository;
-import com.example.plan.service.IStudentWithCourseService;
-import com.example.plan.service.Impl.CourseService;
-import com.example.plan.service.Impl.StudentService;
-import com.example.plan.service.Impl.StudentWithCourseService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.plan.util.Calculator;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @SpringBootTest
 class PlanApplicationTests {
+	private final Calculator calculator = new Calculator();
 
-	@Autowired
-	private CourseService courseService;
+	@BeforeAll
+	public static void beforeAll() {
+		System.out.println("[BEFORE ALL]");
+	}
 
-	@Autowired
-	private StudentService studentService;
+	@BeforeEach
+	public void beforeEach() {
+		System.out.println("[TEST START]");
+	}
 
-	@Autowired
-	private StudentWithCourseService studentWithCourseService;
+	@AfterEach
+	public void afterEach() {
+		System.out.println("[TEST END]");
+	}
 
-	@Test
-	public void addCourse () {
-		var course = new Course();
-		course.setName("體育");
-		courseService.save(course);
+	@AfterAll
+	private static void afterAll() {
+		System.out.println("[AFTER ALL]");
 	}
 
 	@Test
-	public void addStudent () {
+	public void Addition() {
+		Assertions.assertEquals(2, calculator.add(1, 1));
 	}
 
-	@Test
-	public void updateStudent () {
-		var repoStudent = studentService.findById(44).get();
-		repoStudent.setName("王花44");
-		studentService.updateById(repoStudent);
+	@ParameterizedTest
+	@ValueSource(strings = { "racecar", "radar", "able was I ere I saw elba" })
+	public void palindromes(String candidate) {
+		System.out.println(candidate);
 	}
 
-	@Test
-	public void addStudentToCourse () {
-		long studentId = 3;
-		long courseId = 2;
-		var studentWithCourse = new StudentWithCourse();
-		studentWithCourse.setStudentId(studentId);
-		studentWithCourse.setCourseId(courseId);
-		studentWithCourseService.save(studentWithCourse);
+	@RepeatedTest(10)
+	public void repeatedTest(RepetitionInfo repetitionInfo) {
+		System.out.println(repetitionInfo.getCurrentRepetition());
 	}
+
+	@TestFactory
+	@DisplayName("Create 3 tests")
+	public Collection<DynamicTest> dynamicTestsWithCollection() {
+		var dynamicTestList = new ArrayList<DynamicTest>();
+
+		for (int i = 0; i < 3; i++) {
+			var num = i;
+			var addTest = DynamicTest.dynamicTest(
+					"ADD TEST",
+					() -> Assertions.assertEquals(num * 2, Math.addExact(num, num))
+			);
+			System.out.println("i: " + num);
+			System.out.println("expected: " + num * 2);
+			dynamicTestList.add(addTest);
+		}
+
+		return dynamicTestList;
+	}
+
+	// @Nested https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested
+
+
 }
