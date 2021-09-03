@@ -4,10 +4,8 @@ import com.example.plan.entity.Teacher;
 import com.example.plan.reponse.DataResponse;
 import com.example.plan.service.Impl.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
