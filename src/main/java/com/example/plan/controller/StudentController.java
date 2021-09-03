@@ -6,6 +6,7 @@ import com.example.plan.service.Impl.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,21 @@ public class StudentController {
     studentService.updateById(updateStudent);
     var msg = "學生ID: " + updateStudent.getId() + " 更新完成";
     return new DataResponse(updateStudent,  msg);
+  }
+
+  @GetMapping("/get/{id}")
+  public DataResponse getStudentById(@PathVariable(name="id") long id) {
+    var repoStudent = studentService.findById(id);
+
+    if (repoStudent.isEmpty()) return new DataResponse(null, "查無此學生");
+
+    Map<String, Object> result = new HashMap<>();
+    result.put("id", repoStudent.get().getId());
+    result.put("name", repoStudent.get().getName());
+    result.put("sex", repoStudent.get().getSex());
+    result.put("birthday", repoStudent.get().getBirthday());
+
+    return new DataResponse(result, "操作成功");
   }
 
   @GetMapping("/getAll")

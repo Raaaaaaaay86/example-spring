@@ -1,6 +1,5 @@
 package com.example.plan.service;
 
-import com.example.plan.entity.Course;
 import com.example.plan.entity.Student;
 
 import java.util.List;
@@ -12,5 +11,5 @@ public interface IStudentService {
   public List<Student> findAll();
   public void deleteById(long id);
   public void deleteAll();
-  public boolean updateById(Student student);
+  public Student updateById(Student student);
 }
