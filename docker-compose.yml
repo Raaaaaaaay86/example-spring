@@ -1,0 +1,44 @@
+version: '3.8'
+
+networks:
+  test-network:
+    external: true
+
+services:
+  spring:
+    image: image-spring
+    container_name: emu-spring
+    ports:
+      - 8080:8080
+    networks:
+      - test-network
+  sql:
+    image: mysql
+    container_name: emu-sql
+    ports:
+      - 3307:3306
+    networks:
+      - test-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=eee333
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
+  test-redis:
+    image: redis
+    container_name: emu-redis
+    ports:
+      - 6379:6379
+    networks:
+      - test-network
+  test-rabbit:
+    image: rabbitmq:3-management
+    container_name: emu-rabbit
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - test-network
+volumes:
+  mysql_data:
+  mysql_config:
