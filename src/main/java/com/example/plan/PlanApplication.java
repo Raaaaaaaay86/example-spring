@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
 @SpringBootApplication
-@PropertySources({@PropertySource("log4j.properties"), @PropertySource("redis.properties")})
+@PropertySources({@PropertySource("log4j.properties"), @PropertySource("redis.properties"), @PropertySource("rabbitmq.properties")})
 public class PlanApplication {
 
 	public static void main (String[] args) {
