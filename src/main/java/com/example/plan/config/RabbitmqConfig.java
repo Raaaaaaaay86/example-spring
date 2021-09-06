@@ -1,11 +1,9 @@
 package com.example.plan.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.listener.Topic;
 
 @Configuration
 public class RabbitmqConfig {
@@ -26,8 +24,23 @@ public class RabbitmqConfig {
 	}
 
 	@Bean
+	public Queue queueTopicA() {
+		return new Queue("topic.a");
+	}
+
+	@Bean
+	public Queue queueTopicB() {
+		return new Queue("topic.b");
+	}
+
+	@Bean
 	public FanoutExchange fanoutExchanger() {
 		return new FanoutExchange("fanoutExchanger");
+	}
+
+	@Bean
+	public TopicExchange topicExchanger() {
+		return new TopicExchange("topicExchanger");
 	}
 
 	@Bean
@@ -38,5 +51,16 @@ public class RabbitmqConfig {
 	@Bean
 	Binding bindExchangerB() {
 		return BindingBuilder.bind(this.queueB()).to(this.fanoutExchanger());
+	}
+
+	@Bean
+	Binding bindingTopicExchangerA() {
+		return BindingBuilder.bind(this.queueTopicA()).to(this.topicExchanger()).with("topic.a");
+	}
+
+	@Bean
+	Binding bindingTopicExchangerB() {
+		// topic.a, topic.b, topic.c ...... 皆會在此生效
+		return BindingBuilder.bind(this.queueTopicB()).to(this.topicExchanger()).with("topic.#");
 	}
 }
