@@ -20,6 +20,12 @@ public class RabbitmqConfig {
 	}
 
 	@Bean
+	public Queue queueUser() {
+		// 純 Queue 不需要添加 Exchanger，直接指派 queue routing key 即可
+		return new Queue("userQueue");
+	}
+
+	@Bean
 	public FanoutExchange fanoutExchanger() {
 		return new FanoutExchange("fanoutExchanger");
 	}
